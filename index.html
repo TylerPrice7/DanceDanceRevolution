@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dance Dance Revolution</title>
+    <style>
+      #game-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75vw;
+        height: 75vh;
+        border: 1px solid black;
+      }
+
+      #info-board {
+        display: block-inline;
+        width: 12vw;
+        height: 75vh;
+        border: 1px solid green;
+      }
+
+      #gameplay-container {
+        display: inline-block;
+        position: relative;
+        width: 50vw;
+        height: 75vh;
+        border: 1px solid red;
+      }
+
+      #score-container {
+        display: block-inline;
+        width: 12vw;
+        height: 75vh;
+        border: 1px solid blue;
+      }
+      #arrow-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+    </style>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+  <h1 style="text-align: center;"> Dance Dance Revolution </h1>
+  <div style="display:flex; justify-content: center;">
+    <div id="game-container">
+      <div id="app">
+        <div style="display:flex;">
+          <div id="leaderboard">
+            <p> This is the leaderboard. </p>
+          </div>
+          <div id="gameplay-container">
+            <img src="resources/dancedance.png" id="gameplay_background" style="width:50vw; height:75vh;">
+            <img src="resources/left-arrow-white.png" id="static_left_arrow" style="position: absolute; left: 23%; top:0px;">
+            <img src="resources/down-arrow-white.png" id="static_down_arrow" style="position: absolute; left: 37%;">
+            <img src="resources/up-arrow-white.png" id="static_up_arrow" style="position: absolute; left: 51%;">
+            <img src="resources/right-arrow-white.png" id="static_right_arrow" style="position: absolute; left: 65%;">
+            <div id="arrow-container">
+            </div>
+          </div>
+          <div id="score-container">
+            <p> This is the score board. </p>
+            <p> Score: {{this.score}} </p>
+            <p> Remaining misses: {{this.misses}} </p>
+            <button @click="togglePlay()">Play Game</button>
+            <div id="diffuculty-buttons">
+              <button @click="setDifficulty('easy')">Easy</button>
+              <button @click="setDifficulty('medium')">Medium</button>
+              <button @click="setDifficulty('hard')">Hard</button>
+            </div>
+            <button @click="muteMusic()">Mute Music</button>
+            <button @click="resetGame()">Reset Game</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <audio id="music_track" muted autoplay loop>
+    <source src="resources/lick_the_chorus.mp3" type="audio/mpeg">
+  </audio>
+  <script type="module" src="dance.js"></script>
+</body>
+</html>
