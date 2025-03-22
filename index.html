@@ -4,35 +4,76 @@
     <meta charset="UTF-8">
     <title>Dance Dance Revolution</title>
     <style>
+      #leaderboard {
+        padding-top: 100px;
+        text-align: center;
+        justify-content: center;
+      }
+      #leaderboard li {
+        padding: 0;
+        margin: 0 auto;
+        width: 10vw;
+        list-style: none; /* Removes default bullet points */
+        font-weight: bold;
+        padding: 8px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #ddd;
+        background: white;
+        transition: transform 0.2s ease-in-out;
+      }
+      li:hover {
+        transform: scale(1.05);
+        background: #e3f2fd;
+      }
+      .buttons:hover {
+        transform: scale(1.05);
+        background: #e3f2fd;
+      }
       #game-container {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 75vw;
         height: 75vh;
-        border: 1px solid black;
+        border: 1px solid white;
+        border-radius: 100px;
       }
-
       #info-board {
         display: block-inline;
         width: 12vw;
         height: 75vh;
-        border: 1px solid green;
       }
-
       #gameplay-container {
         display: inline-block;
         position: relative;
         width: 50vw;
         height: 75vh;
-        border: 1px solid red;
       }
-
+      #score-board {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        background-color: skyblue;
+        width: 11vw;
+        height: 30px;
+      }
+      #lives-board {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        background-color: orange;
+        width: 11vw;
+        height: 30px;
+      }
       #score-container {
-        display: block-inline;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 12vw;
         height: 75vh;
-        border: 1px solid blue;
       }
       #arrow-container {
         position: absolute;
@@ -41,18 +82,35 @@
         width: 100%;
         height: 100%;
       }
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 120px;
+        height: 35px;
+        font-size: 20px;
+        margin-bottom: 5px;
+        border-radius: 10px;
+        transition: transform 0.2s ease-in-out;
+      }
+    hr {
+      width: 10vw;
+      border: none;
+      background-color: white;
+      border-top: 1px solid rgba(0, 0, 0, 0.5);
+    }
 
     </style>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
-<body>
-  <h1 style="text-align: center;"> Dance Dance Revolution </h1>
+<body style="background-color: rgb(48, 5, 55);">
+  <h1 style="text-align: center; color: white"> Dance Dance Revolution </h1>
   <div style="display:flex; justify-content: center;">
     <div id="game-container">
       <div id="app">
         <div style="display:flex;">
           <div id="leaderboard">
-            <p> This is the leaderboard. </p>
+            <h1 style="color: white;"> Leaderboard </h1>
           </div>
           <div id="gameplay-container">
             <img src="resources/dancedance.png" id="gameplay_background" style="width:50vw; height:75vh;">
@@ -64,17 +122,29 @@
             </div>
           </div>
           <div id="score-container">
-            <p> This is the score board. </p>
-            <p> Score: {{this.score}} </p>
-            <p> Remaining misses: {{this.misses}} </p>
-            <button @click="togglePlay()">Play Game</button>
-            <div id="diffuculty-buttons">
-              <button @click="setDifficulty('easy')">Easy</button>
-              <button @click="setDifficulty('medium')">Medium</button>
-              <button @click="setDifficulty('hard')">Hard</button>
-            </div>
-            <button @click="muteMusic()">Mute Music</button>
-            <button @click="resetGame()">Reset Game</button>
+              <h2 style="color: white;"> Score </h2>
+              <div id="score-board">
+                {{this.score}}
+              </div>
+              <h2 style="color: white;"> Lives </h2>
+              <div id="lives-board">
+                {{this.misses}}
+              </div>
+              <hr>
+              <div id="diffuculty-buttons">
+                <button @click="setDifficulty('easy')" class="buttons" style="background-color: lightgreen;">Easy</button>
+                <button @click="setDifficulty('medium')" class="buttons" style="background-color: palegoldenrod;">Normal</button>
+                <button @click="setDifficulty('hard')" class="buttons" style="background-color: lightcoral;">Hard</button>
+              </div>
+              <div>
+                <hr>
+              </div>
+              <button @click="togglePlay()" class="buttons" style="background-color: skyblue;">Play</button>
+              <button @click="resetGame()" class="buttons" style="background-color: cornsilk;">Reset</button>
+              <div>
+                <hr>
+              </div>
+              <button @click="muteMusic()" class="buttons">Mute</button>
           </div>
         </div>
       </div>
